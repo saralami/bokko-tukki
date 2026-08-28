@@ -1,0 +1,9 @@
+---
+paths:
+  - 'app/Http/Controllers/Admin/**'
+---
+
+# Admin
+
+## Backoffice admin : supervision + finance immuable + audit + settings éditables
+Accès admin = middleware role:admin (super-admin via Gate::before dans AppServiceProvider) + tout le groupe auth passe par EnsureUserIsNotSuspended (users.suspended_at déconnecte les comptes suspendus). Le backoffice est en SUPERVISION + actions ciblées (listes/détails/filtres partout ; pas de CRUD dupliquant le self-service transporteur). Opérations sensibles TOUJOURS tracées via App\Support\AuditLogger::log(action, desc, model?, meta?) → table audit_logs immuable (updating/deleting throw). Actions auditées : user.suspended/reinstated/role_changed, transporter.status_changed, trip.cancelled, payment.refunded, withdrawal.approved/paid/rejected, setting.updated. FINANCE : aucune route d'édition/suppression de Payment ni LedgerEntry (ledger immuable au niveau modèle). Toute correction = écriture compensatoire justifiée : FinanceController@refund exige un 'reason' (min 5), appelle RefundPayment($payment,$reason) qui ajoute une LedgerEntry type Refund (jamais d'edit). PaymentStatus/PaymentMethod ont ::values(). Paramètres métier éditables : App\Support\Settings (table settings key/value, fallback config/allodakar.php). ATTENTION clés à point ('commission.rate') : ne pas valider avec des rules à clé pointée (interprétées comme imbriquées) ; valider settings.* générique puis contrôler min/max à la main sur $request->input('settings'). Points d'usage rewire vers Settings::get : ProcessCashPayment, ProcessMobileMoneyPayment (commission.rate), Transporter::hasExceededDebtCeiling (debt.maximum), CancelBooking + BookingPresenter (cancellation.deadline_hours), SendDepartureReminders (reminder.lead_hours). Nav admin = AppSidebar role-aware (auth.roles inclut 'admin').
