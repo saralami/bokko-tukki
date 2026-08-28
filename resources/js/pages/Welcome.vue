@@ -25,11 +25,15 @@ const trust = [
     <Head title="Bokko Tuki — Réservez vos trajets interurbains" />
 
     <div class="flex min-h-screen flex-col bg-background text-foreground">
+        <!-- Bandeau logo -->
+        <div class="flex justify-center px-4 pt-8 pb-4">
+            <BrandLogo class="h-40 w-auto md:h-48" />
+        </div>
+
         <!-- Top bar -->
         <header class="sticky top-0 z-20 border-b border-sidebar-border/70 bg-background/90 backdrop-blur dark:border-sidebar-border">
             <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-2 font-bold">
-                    <BrandLogo class="size-12" />
                     <span class="text-lg">Bokko Tuki</span>
                 </div>
                 <nav class="flex items-center gap-2">
@@ -46,7 +50,6 @@ const trust = [
 
         <!-- Hero -->
         <section class="mx-auto flex w-full max-w-6xl flex-col items-center gap-8 px-4 py-16 text-center md:py-24">
-            <BrandLogo class="size-56 md:size-72" />
             <span class="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-sm font-semibold text-accent-foreground">
                 De ville en ville, en toute confiance
             </span>
