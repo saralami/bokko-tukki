@@ -16,7 +16,8 @@
     --brand-gold: #fab800; /* Jaune / or (carrosserie, trait)  hsl(45 100% 49%) */
     --brand-orange: #fa6400; /* Orange soleil                  hsl(24 100% 49%) */
     --brand-red: #e60a14; /* Rouge soleil / repère GPS         hsl(357 85% 47%) */
-    --brand-white: #ffffff; /* Rouge soleil / repère GPS
+    --brand-white: #ffffff; /* Blanc pur (cartes, contrastes) */
+    --brand-cream: hsl(45 33% 80%); /* Blanc cassé / beige doux (fond du site) */
 
     /* Variantes dérivées utiles */
     --brand-green-hover: #00694a;
@@ -25,7 +26,7 @@
     --brand-gold-tint: hsl(45 92% 91%); /* fond or très clair */
 
     /* === Tokens sémantiques — mode clair === */
-    --background: hsl(150 25% 99%);
+    --background: var(--brand-cream);
     --foreground: hsl(160 28% 12%);
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(160 28% 12%);
