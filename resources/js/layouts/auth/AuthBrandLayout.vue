@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Bus, MapPin, ShieldCheck } from '@lucide/vue';
+import { ArrowLeft, Bus, MapPin, ShieldCheck } from '@lucide/vue';
 import BrandLogo from '@/components/BrandLogo.vue';
 import { home } from '@/routes';
 
@@ -41,13 +41,22 @@ const highlights = [
                 class="pointer-events-none absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-chart-3/20 blur-3xl"
             />
 
-            <Link
-                :href="home()"
-                class="relative z-10 flex items-center gap-3 text-lg font-bold text-primary"
-            >
-                <BrandLogo class="size-16" />
-                Bokko Tuki
-            </Link>
+            <div class="relative z-10 space-y-6">
+                <Link
+                    :href="home()"
+                    class="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-2 text-sm font-medium text-foreground/80 backdrop-blur transition hover:text-primary"
+                >
+                    <ArrowLeft class="h-4 w-4" />
+                    Retour à l’accueil
+                </Link>
+                <Link
+                    :href="home()"
+                    class="flex items-center gap-3 text-lg font-bold text-primary"
+                >
+                    <BrandLogo class="size-16" />
+                    Bokko Tuki
+                </Link>
+            </div>
 
             <div class="relative z-10 max-w-md space-y-8">
                 <h2 class="text-3xl font-extrabold leading-tight tracking-tight">
@@ -81,15 +90,20 @@ const highlights = [
         </div>
 
         <!-- Panneau du formulaire -->
-        <div class="flex flex-col items-center justify-center bg-background p-6 md:p-10">
+        <div class="relative flex flex-col items-center justify-center bg-background p-6 md:p-10">
+            <!-- Retour accueil (mobile / tablette) -->
+            <Link
+                :href="home()"
+                class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-border/60 px-3 py-1.5 text-sm font-medium text-foreground/70 transition hover:bg-muted hover:text-primary lg:hidden"
+            >
+                <ArrowLeft class="h-4 w-4" />
+                Accueil
+            </Link>
+
             <div class="w-full max-w-sm space-y-8">
-                <div class="space-y-2 text-center lg:text-left">
-                    <Link
-                        :href="home()"
-                        class="mb-4 inline-flex items-center gap-2 font-bold lg:hidden"
-                    >
-                        <BrandLogo class="size-12" />
-                        Bokko Tuki
+                <div class="flex flex-col items-center gap-2 text-center lg:items-start lg:text-left">
+                    <Link :href="home()" class="mb-2 lg:hidden">
+                        <BrandLogo class="h-20 w-auto" />
                     </Link>
                     <h1 v-if="title" class="text-2xl font-bold tracking-tight">
                         {{ title }}
